@@ -5,7 +5,7 @@ import mysql from "mysql2";
 import nodemon from "nodemon";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";//Toma URL de archivo y lo convierte en ruta.
-import { conn } from "./src/models/db.js";
+import { conn } from "./src/models/db.js";// {conn} porque no esta exportado como default. 
 
 const app = express();
 app.use(cors());
