@@ -5,7 +5,8 @@ import mysql from "mysql2";
 import nodemon from "nodemon";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";//Toma URL de archivo y lo convierte en ruta.
-import { conn } from "./src/models/db.js";// {conn} porque no esta exportado como default. 
+import { conn } from "./src/models/db.js";// {conn} porque no esta exportado como default.
+import pacienteRouter from "./src/router/pacienteRouter.js";
 
 const app = express();
 app.use(cors());
@@ -18,6 +19,9 @@ const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
+app.use('/', pacienteRouter);//Usa ruta base '/', despues lo que venga, lo redigije a pacienteRouter
+//si es necesario.
+
 
 app.listen(3000, () => {
     console.log("Server running on port 3000");
