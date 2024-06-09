@@ -86,8 +86,3 @@ router.put("/pacientes/update/:id", async (req, res) => {
 }*/
 
 export default router;
-
-
-//router.delete("/pacientes/:id", desactivarPaciente);
-//router.put("/pacientes/:id", updatePaciente);
-//router.patch("/pacientes/:id", updatePaciente);//Actualiza 1 solo atributo que vos le envies.

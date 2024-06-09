@@ -8,6 +8,8 @@ import { fileURLToPath } from "url";//Toma URL de archivo y lo convierte en ruta
 import { conn } from "./src/models/db.js";// {conn} porque no esta exportado como default.
 import pacienteRouter from "./src/router/pacienteRouter.js";
 import profesionalRouter from "./src/router/profesionalRouter.js";
+import adminRouter from "./src/router/adminRouter.js";
+import medicamentosRouter from "./src/router/medicamentosRouter.js";
 
 const app = express();
 app.use(cors());
@@ -22,6 +24,8 @@ app.set("view engine", "pug");
 //app.locals.pretty = true;
 app.set("views", path.join(__dirname, "/src/views"));
 app.use('/', profesionalRouter);
+app.use('/', adminRouter);
+app.use('/', medicamentosRouter);
 app.use('/', pacienteRouter);//Usa ruta base '/', despues lo que venga, lo redigije a pacienteRouter
 //si es necesario.
 

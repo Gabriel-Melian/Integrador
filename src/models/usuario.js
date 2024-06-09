@@ -7,8 +7,7 @@ class Usuario {
         this.password = null;
         this.email = null;
         this.dni = null;
-        this.domicilio = null;
-        this.rol = 0;
+        this.rol = null;
     }
     validateModel(model) {
         const keys = Object.keys(model);

@@ -97,7 +97,8 @@ header {
     text-align: center;
 }
 
-nav ul {/*nav sirve para crear un menu*/
+nav ul {
+    /*nav sirve para crear un menu*/
     list-style-type: none;
 }
 
@@ -117,7 +118,8 @@ main {
     margin-top: 20px;
 }
 
-footer {/*footer sirve para crear un pie de pagina*/
+footer {
+    /*footer sirve para crear un pie de pagina*/
     background-color: #333;
     color: #fff;
     padding: 10px 0;
@@ -126,16 +128,23 @@ footer {/*footer sirve para crear un pie de pagina*/
 
 .cerrar-sesion a {
     position: absolute;
-    top: 10px;/* Ajusta la distancia desde el borde superior */
-    right: 10px;/* Ajusta la distancia desde el borde derecho */
-    padding: 5px 10px;/* Añade espacio interno al botón */
-    color: white;/* Color del texto del botón */
-    text-decoration: none;/* Elimina subrayado del enlace */
-    border-radius: 5px;/* Añade esquinas redondeadas */
+    top: 10px;
+    /* Ajusta la distancia desde el borde superior */
+    right: 10px;
+    /* Ajusta la distancia desde el borde derecho */
+    padding: 5px 10px;
+    /* Añade espacio interno al botón */
+    color: white;
+    /* Color del texto del botón */
+    text-decoration: none;
+    /* Elimina subrayado del enlace */
+    border-radius: 5px;
+    /* Añade esquinas redondeadas */
 }
 
 .cerrar-sesion a:hover {
-    background-color: #4b4646;/*Color al pasar cursor*/
+    background-color: #4b4646;
+    /*Color al pasar cursor*/
 }
 
 .btn {
@@ -150,11 +159,74 @@ footer {/*footer sirve para crear un pie de pagina*/
     border: none;
     cursor: pointer;
 }
-  
+
 .btn:hover {
     background-color: #0056b3;
 }
 
+/*Tabla*/
 .tabla {
-    border: 5 px solid black;
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+}
+
+/*Celdas de la cabecera*/
+.tabla thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+
+/*Celdas del cuerpo*/
+.tabla tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+/*Alternar color de fila*/
+.tabla tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+/*Celdas de la tabla*/
+.tabla tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.tabla td,
+.tabla th {
+    padding: 12px 15px;
+}
+
+/*Botones*/
+.tabla button {
+    padding: 5px 10px;
+    background-color: #009879;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.tabla button:hover {
+    background-color: #007f63;
+}
+
+/*Boton de Ingresar*/
+.btn-ingresar {
+    margin-left: 20px; /*Espacio entre h2 y boton*/
+    padding: 8px 16px;
+    background-color: #009879;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+  
+.btn-ingresar:hover {
+    background-color: #007f63;
 }

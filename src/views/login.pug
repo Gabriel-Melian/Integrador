@@ -1,0 +1,30 @@
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Login
+    link(rel="stylesheet", href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css')
+    link(rel="stylesheet", href='../login.css')
+  body
+    .contenedor-login
+      form(action="")
+        h1 Login
+        .input-box
+          input(type="text" placeholder="User" required)
+          i(class='bx bxs-user')
+          
+        .input-box
+          input(type="password" placeholder="Password" required)
+          i(class='bx bxs-lock-alt')
+
+        .recuerdame
+          label(for="recuerdame")
+            input(type="checkbox" id="recuerdame")
+            | Recuérdame
+          a(href="#") Olvidaste la contraseña?
+        
+        button(type="submit" class="btn") Login
+
+        //.register-link
+          p No tenes usuario?
+            a(href="#")  Regístrate

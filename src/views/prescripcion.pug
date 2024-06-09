@@ -1,0 +1,60 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Prescripción Electrónica
+    link(rel="stylesheet", type="text/css", href="../prescripForm.css")
+
+  body
+    .container
+      .header
+        h1 Prescripción Electrónica
+        p
+          | Nombre y apellido del médico:
+          br
+          | DNI:
+          br
+          | Profesión:
+          br
+          | Especialidad:
+          br
+          | Domicilio:
+          br
+          | Matrícula:
+      .section
+        h2 Información del Paciente
+        table
+          tr
+            th Nombre
+            td #{nombrePaciente}
+            th Fecha de Nacimiento
+            td #{fechaNac}
+          tr
+            th DNI
+            td #{dniPaciente}
+            th Obra Social
+            td #{obraSocial}
+          tr
+            th Sexo
+            td #{sexo}
+            th Plan
+            td #{plan}
+      .section
+        h2 Diagnóstico y Tratamiento
+        table
+          tr
+            th Diagnóstico
+            td #{diagnostico}
+            th Fecha de la Prescripción
+            td #{fechaPrescrip}
+      .section
+        h2 Medicamentos y/o Prestaciones
+        table
+          tr
+            th Medicamento/Prestación
+            td #{contactoPaciente}
+            th Medicación
+            td #{medicacionPaciente}
+            th Dosificación
+            td #{dosificacionPaciente}

@@ -1,4 +1,6 @@
-h2 Pacientes registrados
+h2
+  | Pacientes registrados
+  button(class="btn-ingresar", onclick="ingresarNuevoPaciente()") Ingresar nuevo paciente
 table(class="tabla")
   thead
     tr
@@ -24,4 +26,4 @@ table(class="tabla")
         td #{paciente.estadoStr}
         td
           button(onclick=`editarPaciente(${paciente.id})`) Editar
-          button(onclick=`darDeBajaPaciente(${paciente.id})`) Dar de baja
+          button(onclick=`bajaPaciente(${paciente.id})`) Dar de baja

@@ -4,24 +4,44 @@ html(lang="en")
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title Usuario Admin
-    link(rel="stylesheet", href="estilo.css")
+    link(rel="stylesheet", type="text/css", href="../estilo.css")
   body
     header
       .container
-        h1 Bienvenido, Admin #{admin.nombre} #{admin.apellido}
+        h1 Bienvenido, Administrador #{admin.nombre} #{admin.apellido}
         .cerrar-sesion
           a(href="/logout") Cerrar Sesión
     main
       .container
         h2 Profesionales
-        ul
-          each profe in profes
-            li #{profes.nombre} #{profes.apellido} #{profes.estado}
+        table(class="tabla")
+          thead
+            tr
+              th Nombre
+              th Apellido
+              th DNI
+              th Email
+              th Profesion
+              th Especialidad
+              th Matricula
+              th Estado
+              th Acciones
+          tbody
+            each profe in profes
+              tr
+                td #{profe.nombre}
+                td #{profe.apellido}
+                td #{profe.dni}
+                td #{profe.email}
+                td #{profe.profesion}
+                td #{profe.especialidad}
+                td #{profe.matricula}
+                td #{profe.estadoStr}
+                td
+                  button(onclick=`bajaProf(${profe.id})`) Dar de baja
+                  button(onclick=`altaProf(${profe.id})`) Dar de Alta
 
-        h2 Medicamentos
-        ul
-          each medicamento in medicamentos
-            li #{medicamento.nombre} - #{medicamento.estado}
+        include medicamentos.pug
 
     footer
       .container

@@ -1,0 +1,21 @@
+h2 Medicamentos
+        table(class="tabla")
+          thead
+            tr
+              th Nombre
+              th Concentracion
+              th Forma Farmaceutica
+              th Presentacion
+              th Estado
+              th Acciones
+          tbody
+            each medicamento in medicamentos
+              tr
+                td #{medicamento.nombre}
+                td #{medicamento.concentracion}
+                td #{medicamento.formaFarmaceutica}
+                td #{medicamento.presentacion}
+                td #{medicamento.estadoStr}
+                td
+                  button(onclick=`bajaMed(${medicamento.id})`) Dar de Baja
+                  button(onclick=`altaMed(${medicamento.id})`) Dar de Alta

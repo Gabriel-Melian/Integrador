@@ -11,7 +11,13 @@ const router = Router();
 router.get("/profesional", async (req, res) => {
     const profesional = await getProfesional(3);
     const pacientes = await getPacientes(3);
-    //console.log(profesionales);
+    //console.log(pacientes);
+    //console.log(profesional);
+    pacientes.forEach(paciente => {
+        paciente.fechaNac = new Date(paciente.fechaNac).toLocaleDateString();
+        paciente.estadoStr = (paciente.estado === 1) ? "Activo" : "Inactivo";
+        paciente.sexoStr = (paciente.sexo === "Masculino") ? "M" : "F";
+    })
     res.status(200).render("layoutMedico", {prof: profesional, pacientes: pacientes});
 });
 

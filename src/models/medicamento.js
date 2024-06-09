@@ -4,7 +4,7 @@ class Medicamento {
         this.id = null;
         this.nombre = null;
         this.concentracion = null;
-        this.formaFarm = null;
+        this.formaFarmaceutica = null;
         this.presentacion = null;
         this.estado = null;
     }
