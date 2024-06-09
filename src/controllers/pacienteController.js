@@ -1,10 +1,13 @@
 import Paciente from "../models/paciente.js";
 import { conn } from "../models/db.js";
 
-export async function getPacientes() {//Mostrar todos los pacientes
-    const query = "SELECT * FROM paciente";
+export async function getPacientes(idMedico) {//Mostrar pacientes por medico
+    const query = `SELECT p.* FROM prescripcion
+                JOIN paciente as p ON prescripcion.idPaciente = p.id
+                JOIN profesionales as pr ON prescripcion.idProfesional = pr.id
+                WHERE pr.id = ?;`;
     try {
-        const result = await conn.execute(query);
+        const result = await conn.execute(query, [idMedico]);
         if(result.length === 0) return [];
         console.log(result);
         const [rows] = result;
@@ -14,7 +17,6 @@ export async function getPacientes() {//Mostrar todos los pacientes
         throw error;
     }
 }
-//Consultar,guardar, buscar paciente por id,nombre,dni.
 
 export async function guardarPaciente(paciente) {//Insertar paciente. Desestructuracion.
     //Falta validacion.
@@ -75,10 +77,35 @@ export async function getPacienteNombre(paciente) {//Buscar por nombre
     }
 }
 
-export async function desactivarPaciente(id) {//Borrar paciente
+export async function desactivarPaciente(id) {//Desactivado logico de paciente
     const query = "UPDATE paciente SET estado = 0 WHERE id = ?";
     try {
         const result = await conn.execute(query, [id]);
+        console.log(result);
+        return result;
+    } catch (error) {
+        console.error("Error executing query:", error);
+        throw error;
+    }
+}
+
+export async function activarPaciente(id) {//Activado logico de paciente
+    const query = "UPDATE paciente SET estado = 1 WHERE id = ?";
+    try {
+        const result = await conn.execute(query, [id]);
+        console.log(result);
+        return result;
+    } catch (error) {
+        console.error("Error executing query:", error);
+        throw error;
+    }
+}
+
+export async function modificarPaciente(paciente) {
+    const { id, nombre, apellido, dni, fechaNac, email, sexo, idObraSocial } = paciente;
+    const query = "UPDATE paciente SET nombre = ?, apellido = ?, dni = ?, fechaNac = ?, email = ?, sexo = ?, idObraSocial = ? WHERE id = ?";
+    try {
+        const [result] = await conn.execute(query, [nombre, apellido, dni, fechaNac, email, sexo, idObraSocial, id]);
         console.log(result);
         return result;
     } catch (error) {

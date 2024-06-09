@@ -1,0 +1,27 @@
+h2 Pacientes registrados
+table(class="tabla")
+  thead
+    tr
+      th Nombre
+      th Apellido
+      th DNI
+      th Fecha de Nacimiento
+      th Email
+      th Sexo
+      th Obra Social
+      th Estado
+      th Acciones
+  tbody
+    each paciente in pacientes
+      tr
+        td #{paciente.nombre}
+        td #{paciente.apellido}
+        td #{paciente.dni}
+        td #{paciente.fechaNac}
+        td #{paciente.email}
+        td #{paciente.sexoStr}
+        td #{paciente.idObraSocial}
+        td #{paciente.estadoStr}
+        td
+          button(onclick=`editarPaciente(${paciente.id})`) Editar
+          button(onclick=`darDeBajaPaciente(${paciente.id})`) Dar de baja

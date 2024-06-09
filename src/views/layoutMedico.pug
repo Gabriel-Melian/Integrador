@@ -1,0 +1,27 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Layout Medico
+    link(rel="stylesheet", type="text/css", href="../estilo.css")
+    script(src="../pacientes.js" defer)
+  body
+    header
+      .container
+        h1 Bienvenido, Dr. #{prof.nombre} #{prof.apellido}
+        nav
+          ul
+            li: a(href="/prescripcion") Prescripciones
+            li: a(href="/calendario") Calendario
+            li: a(href="/perfil") Perfil
+        .cerrar-sesion
+          a(href="/logout") Cerrar Sesión
+    main
+      .container
+        //block contenido
+        include pacientes.pug
+        //Este block inserta lo que yo defina como contenido en otra vista. Es como una variable.
+    footer
+      .container
+        p Derechos de autor © 2024. Todos los derechos reservados.

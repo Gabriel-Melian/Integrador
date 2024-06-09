@@ -1,0 +1,28 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Usuario Admin
+    link(rel="stylesheet", href="estilo.css")
+  body
+    header
+      .container
+        h1 Bienvenido, Admin #{admin.nombre} #{admin.apellido}
+        .cerrar-sesion
+          a(href="/logout") Cerrar Sesión
+    main
+      .container
+        h2 Profesionales
+        ul
+          each profe in profes
+            li #{profes.nombre} #{profes.apellido} #{profes.estado}
+
+        h2 Medicamentos
+        ul
+          each medicamento in medicamentos
+            li #{medicamento.nombre} - #{medicamento.estado}
+
+    footer
+      .container
+        p Derechos de autor © 2024. Todos los derechos reservados.
