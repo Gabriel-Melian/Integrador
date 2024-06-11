@@ -28,25 +28,35 @@ html(lang="en")
             th Nombre
             td 
               input(type="text" name="nombrePaciente" value=nombrePaciente placeholder="Nombre del paciente")
+            th DNI
+            td 
+              input(type="number" name="dniPaciente" value=dniPaciente placeholder="DNI")
             th Fecha de Nacimiento
             td 
               input(type="date" name="fechaNac" value=fechaNac)
           tr
-            th DNI
+            th Apellido
             td 
-              input(type="text" name="dniPaciente" value=dniPaciente placeholder="DNI del paciente")
+              input(type="text" name="apellidoPaciente" value=nombrePaciente placeholder="Apellido del paciente")
             th Obra Social
             td 
-              input(type="text" name="obraSocial" value=obraSocial placeholder="Obra Social")
+              select(name="obraSocial" id="obraSocial" onchange="actualizarPlanes()")
+                option(value="") Seleccione Obra Social
+                each obraSocial in obrasSociales
+                  option(value=obraSocial.id) #{obraSocial.nombre}
+            th E-mail
+            td 
+              input(type="text" name="emailPaciente" value=plan placeholder="E-mail")
           tr
             th Sexo
             td 
               select(name="sexo")
-                option(value="M" selected=sexo==="M") Masculino
-                option(value="F" selected=sexo==="F") Femenino
+                option(value="Masculino" selected=sexo==="Masculino") Masculino
+                option(value="Femenino" selected=sexo==="Femenino") Femenino
             th Plan
             td 
-              input(type="text" name="plan" value=plan placeholder="Plan")
+              select(name="plan" id="plan")
+                option(value="") Seleccione Plan
       .section
         h2 Diagnóstico y Tratamiento
         table
@@ -56,12 +66,20 @@ html(lang="en")
               textarea(name="diagnostico" placeholder="Diagnóstico") #{diagnostico}
             th Fecha de la Prescripción
             td 
-              input(type="date" name="fechaPrescrip" value=fechaPrescrip)
+              span(name="fechaPrescrip", id="fechaPrescrip") Fecha actual
+            //input(type="date" name="fechaPrescrip" value=fechaPrescrip)
       .section
         h2 Medicamentos y/o Prestaciones
         table
           tr
-            th Medicamento/Prestación
+            th Prestación
+            td
+              select(name="prestacion")
+                option(value="") Seleccione una prestación
+                each prestacion in prestaciones
+                  option(value=prestacion.id) #{prestacion.estudio} - #{prestacion.parteCuerpo}
+          tr
+            th Medicamento
             td
               select(name="medicamento")
                 option(value="") Sin medicamentos
@@ -72,15 +90,48 @@ html(lang="en")
             td 
               input(type="text" name="dosificacion" placeholder="Ingrese dosificación")
           tr
-            th Prestación
-            td
-              select(name="prestacion")
-                option(value="") Seleccione una prestación
-                each prestacion in prestaciones
-                  option(value=prestacion.id) #{prestacion.estudio} - #{prestacion.parteCuerpo}
+            th Duracion
+            td 
+              input(type="text" name="duracion" placeholder="Ingrese duracion")
+
       .section
         button(type="button" onclick="generarPrescripcion()") Generar Prescripción
+
+
   script.
+    function formatDate(date) {
+      let dia = String(date.getDate()).padStart(2, '0');
+      let mes = String(date.getMonth() + 1).padStart(2, '0');
+      let anio = date.getFullYear();
+      return `${dia}/${mes}/${anio}`;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      let hoy = new Date();
+      document.getElementById('fechaPrescrip').innerText = formatDate(hoy);
+    });
+
     function generarPrescripcion() {
       window.print();
     }
+
+    function actualizarPlanes() {
+      let obraSocialId = document.getElementById('obraSocial').value;
+      let planSelect = document.getElementById('plan');
+      
+      // Limpiar opciones actuales
+      planSelect.innerHTML = '<option value="">Seleccione un plan</option>';
+      
+      if (obraSocialId) {
+        let planes = planesPorObraSocial[obraSocialId] || [];
+        
+        planes.forEach(function(plan) {
+          let option = document.createElement('option');
+          option.value = plan.id;
+          option.text = plan.nombre;
+          planSelect.appendChild(option);
+        });
+      }
+    }
+
+    const planesPorObraSocial = !{JSON.stringify(planesPorObraSocial)};

@@ -2,6 +2,8 @@ import {getPrescripciones, getPrescripcion} from "../controllers/prescripcionCon
 import {getProfesional} from "../controllers/profesionalController.js";
 import {getMedicamentos} from "../controllers/medicamentosController.js";
 import {getPrestaciones} from "../controllers/prestacionController.js";
+import { getObrasSociales } from "../controllers/obraSocialController.js";
+import {getPlanes} from "../controllers/planController.js";
 import {Router} from "express";
 const router = Router();
 
@@ -21,12 +23,23 @@ router.get("/prescripcion", async (req, res) => {
     const profesional = await getProfesional(3);
     const medicamentos = await getMedicamentos();
     const prestaciones = await getPrestaciones();
-    //console.log(prescripcion);
+    const obrasSociales = await getObrasSociales();
+    const planes = await getPlanes();
+
+    const planesPorObraSocial = {};//Ordenar en base al idObra
+    planes.forEach(plan => {
+        if (!planesPorObraSocial[plan.idObra]) {
+            planesPorObraSocial[plan.idObra] = [];
+        }
+        planesPorObraSocial[plan.idObra].push(plan);
+    });
+
     prescripcion.forEach(prescripcion => {
         prescripcion.fechaPrestacion = new Date(prescripcion.fechaPrestacion).toLocaleDateString();
     })
     res.status(200).render("prescripcion", {prescripciones: prescripcion,
-        profesional: profesional, medicamentos: medicamentos, prestaciones: prestaciones});
+        profesional: profesional, medicamentos: medicamentos, prestaciones: prestaciones,
+        obrasSociales: obrasSociales, planesPorObraSocial: planesPorObraSocial});
 });
 
 

@@ -1,7 +1,8 @@
-class ObraSocial {
+class Plan {
 
     constructor() {
         this.id = null;
+        this.idObra = null;
         this.nombre = null;
     }
     validateModel(model) {
@@ -13,8 +14,5 @@ class ObraSocial {
         }
         return true;
     }
-    setPlan(nombre){
-        this.nombre = nombre;
-    }
 }
-export default ObraSocial;
+export default Plan;

@@ -12,6 +12,8 @@ import adminRouter from "./src/router/adminRouter.js";
 import medicamentosRouter from "./src/router/medicamentosRouter.js";
 import prescripcionRouter from "./src/router/prescripcionRouter.js";
 import prestacionRouter from "./src/router/prestacionRouter.js";
+import obraSocialRouter from "./src/router/obraSocialRouter.js";
+import planRouter from "./src/router/planRouter.js";
 
 const app = express();
 app.use(cors());
@@ -30,6 +32,8 @@ app.use('/', adminRouter);
 app.use('/', medicamentosRouter);
 app.use('/', prescripcionRouter);
 app.use('/', prestacionRouter);
+app.use('/', obraSocialRouter);
+app.use('/', planRouter);
 app.use('/', pacienteRouter);//Usa ruta base '/', despues lo que venga, lo redigije a pacienteRouter
 //si es necesario.
 
