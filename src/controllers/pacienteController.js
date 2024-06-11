@@ -9,7 +9,7 @@ export async function getPacientes(idMedico) {//Mostrar pacientes por medico
     try {
         const result = await conn.execute(query, [idMedico]);
         if(result.length === 0) return [];
-        console.log(result);
+        //console.log(result);
         const [rows] = result;
         return rows;
     } catch (error) {
@@ -40,7 +40,7 @@ export async function getPaciente(id) {//Buscar por id
     try {
         const result = await conn.execute(query, [id]);
         if(result.length === 0) return console.log('El ID paciente ' + id + ' no existe');
-        console.log(result);
+        //console.log(result);
         const [rows] = result;
         return rows[0];
     } catch (error) {
@@ -54,7 +54,7 @@ export async function getPacienteDni(dni) {//Buscar por DNI
     try {
         const result = await conn.execute(query, [dni]);
         if(result.length === 0) return console.log('El DNI paciente ' + dni + ' no existe');
-        console.log(result);
+        //console.log(result);
         const [rows] = result;
         return rows[0];
     } catch (error) {
@@ -68,7 +68,7 @@ export async function getPacienteNombre(paciente) {//Buscar por nombre
     try {
         const result = await conn.execute(query, [paciente]);
         if(result.length === 0) return console.log('El Paciente ' + paciente + ' no existe');
-        console.log(result);
+        //console.log(result);
         const [rows] = result;
         return rows[0];
     } catch (error) {
@@ -81,7 +81,7 @@ export async function desactivarPaciente(id) {//Desactivado logico de paciente
     const query = "UPDATE paciente SET estado = 0 WHERE id = ?";
     try {
         const result = await conn.execute(query, [id]);
-        console.log(result);
+        //console.log(result);
         return result;
     } catch (error) {
         console.error("Error executing query:", error);
@@ -93,7 +93,7 @@ export async function activarPaciente(id) {//Activado logico de paciente
     const query = "UPDATE paciente SET estado = 1 WHERE id = ?";
     try {
         const result = await conn.execute(query, [id]);
-        console.log(result);
+        //console.log(result);
         return result;
     } catch (error) {
         console.error("Error executing query:", error);
@@ -106,7 +106,7 @@ export async function modificarPaciente(paciente) {
     const query = "UPDATE paciente SET nombre = ?, apellido = ?, dni = ?, fechaNac = ?, email = ?, sexo = ?, idObraSocial = ? WHERE id = ?";
     try {
         const [result] = await conn.execute(query, [nombre, apellido, dni, fechaNac, email, sexo, idObraSocial, id]);
-        console.log(result);
+        //console.log(result);
         return result;
     } catch (error) {
         console.error("Error executing query:", error);

@@ -9,15 +9,38 @@ html(lang="en")
     header
       .container
         h1 Panel de Prescripciones
-        nav
-          ul
-            li
-              a(href="/prescripcion" class="btn") Nueva Prescripcion
+        //nav
+        //  ul
+        //    li
+        //      a(href="/prescripcion" class="btn") Nueva Prescripción
 
     main
       .container
-        h2 Prescripciones realizadas
-        //Aca se listaran los pacientes del medico
+        h2 
+          | Prescripciones realizadas
+          button(class="btn-ingresar", onclick="generarPrescripcion()") Nueva Prescripcion
+        table(class="tabla")
+          thead
+            tr
+              th id Paciente
+              th id Prestacion
+              th Fecha Prestacion
+              th id Profesional
+              th Diagnostico
+              th id Lista
+              th Acciones
+          tbody
+            each prescripcion in prescripciones
+              tr
+                td #{prescripcion.idPaciente}
+                td #{prescripcion.idPrestacion}
+                td #{prescripcion.fechaPrestacion}
+                td #{prescripcion.idProfesional}
+                td #{prescripcion.diagnostico}
+                td #{prescripcion.idLista}
+                td
+                  button(class="btnVer", onclick=`bajaPrescripcion(${prescripcion.id})`) Ver mas
+
     footer
       .container
         p Derechos de autor © 2024. Todos los derechos reservados.

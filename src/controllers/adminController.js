@@ -6,7 +6,7 @@ export async function getAdmin(id) {
     try {
         const result = await conn.execute(query, [id]);
         if(result.length === 0) return [];
-        console.log(result);
+        //console.log(result);
         const [rows] = result;
         return rows;
     } catch (error) {

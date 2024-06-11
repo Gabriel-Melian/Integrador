@@ -14,3 +14,4 @@ async function crearTabla() {
         console.log(paciente);
     }
 }
+//Todavia no implemente nada aqui.

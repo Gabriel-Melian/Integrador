@@ -6,7 +6,7 @@ export async function getMedicamentos() {
     try {
         const result = await conn.execute(query);
         if(result.length === 0) return [];
-        console.log(result);
+        //console.log(result);
         const [rows] = result;
         return rows;
     } catch (error) {
@@ -20,7 +20,7 @@ export async function getMedicamento(id) {//Buscar por id
     try {
         const result = await conn.execute(query, [id]);
         if(result.length === 0) return console.log('El ID Medicamento ' + id + ' no existe');
-        console.log(result);
+        //console.log(result);
         const [rows] = result;
         return rows[0];
     } catch (error) {
@@ -33,7 +33,7 @@ export async function darBaja(id) {//Dar de Baja
     const query = "UPDATE medicamentos SET estado = 0 WHERE id = ?";
     try {
         const result = await conn.execute(query, [id]);
-        console.log(result);
+        //console.log(result);
         return result;
     } catch (error) {
         console.error("Error executing query:", error);
@@ -45,7 +45,7 @@ export async function darAlta(id) {//Dar de Alta
     const query = "UPDATE medicamentos SET estado = 1 WHERE id = ?";
     try {
         const result = await conn.execute(query, [id]);
-        console.log(result);
+        //console.log(result);
         return result;
     } catch (error) {
         console.error("Error executing query:", error);

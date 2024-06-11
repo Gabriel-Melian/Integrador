@@ -5,56 +5,83 @@ html(lang="en")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title Prescripción Electrónica
     link(rel="stylesheet", type="text/css", href="../prescripForm.css")
-
   body
     .container
       .header
         h1 Prescripción Electrónica
         p
-          | Nombre y apellido del médico:
+          strong Datos del Medico:
           br
-          | DNI:
+          strong Nombre y apellido: #{profesional.apellido} #{profesional.nombre}
           br
-          | Profesión:
+          strong DNI: #{profesional.dni}
           br
-          | Especialidad:
+          strong Profesión: #{profesional.profesion}
           br
-          | Domicilio:
+          strong Especialidad: #{profesional.especialidad}
           br
-          | Matrícula:
+          strong Matrícula: #{profesional.matricula}
       .section
         h2 Información del Paciente
         table
           tr
             th Nombre
-            td #{nombrePaciente}
+            td 
+              input(type="text" name="nombrePaciente" value=nombrePaciente placeholder="Nombre del paciente")
             th Fecha de Nacimiento
-            td #{fechaNac}
+            td 
+              input(type="date" name="fechaNac" value=fechaNac)
           tr
             th DNI
-            td #{dniPaciente}
+            td 
+              input(type="text" name="dniPaciente" value=dniPaciente placeholder="DNI del paciente")
             th Obra Social
-            td #{obraSocial}
+            td 
+              input(type="text" name="obraSocial" value=obraSocial placeholder="Obra Social")
           tr
             th Sexo
-            td #{sexo}
+            td 
+              select(name="sexo")
+                option(value="") Seleccione
+                option(value="M" selected=sexo==="M") Masculino
+                option(value="F" selected=sexo==="F") Femenino
             th Plan
-            td #{plan}
+            td 
+              input(type="text" name="plan" value=plan placeholder="Plan")
       .section
         h2 Diagnóstico y Tratamiento
         table
           tr
             th Diagnóstico
-            td #{diagnostico}
+            td 
+              textarea(name="diagnostico" placeholder="Diagnóstico") #{diagnostico}
             th Fecha de la Prescripción
-            td #{fechaPrescrip}
+            td 
+              input(type="date" name="fechaPrescrip" value=fechaPrescrip)
       .section
         h2 Medicamentos y/o Prestaciones
         table
           tr
             th Medicamento/Prestación
-            td #{contactoPaciente}
-            th Medicación
-            td #{medicacionPaciente}
+            td
+              select(name="medicamento")
+                option(value="") Seleccione un medicamento
+            //    each medicamento in medicamentos
+            //      option(value=medicamento.id) #{medicamento.nombre} - #{medicamento.concentracion} - #{medicamento.formaFarm} - #{medicamento.presentacion} - #{medicamento.estado}
+          tr
             th Dosificación
-            td #{dosificacionPaciente}
+            td 
+              input(type="text" name="dosificacion" placeholder="Ingrese dosificación")
+          tr
+            th Prestación
+            td
+              select(name="prestacion")
+                option(value="") Seleccione una prestación
+          //      each prestacion in prestaciones
+          //        option(value=prestacion.id) #{prestacion.estudio} - #{prestacion.parteCuerpo}
+      .section
+        button(type="button" onclick="generarPrescripcion()") Generar Prescripción
+  script.
+    function generarPrescripcion() {
+      window.print();
+    }

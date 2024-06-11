@@ -7,6 +7,7 @@ const router = Router();
 //http://localhost:3000/admin (GET Thunderclient)
 router.get("/admin", async (req, res) => {
     const admin = await getAdmin(1);
+    //console.log(admin);
     const profesionales = await getProfesionales();
     const medicamentos = await getMedicamentos();
     profesionales.forEach(profesional => {

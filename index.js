@@ -10,6 +10,7 @@ import pacienteRouter from "./src/router/pacienteRouter.js";
 import profesionalRouter from "./src/router/profesionalRouter.js";
 import adminRouter from "./src/router/adminRouter.js";
 import medicamentosRouter from "./src/router/medicamentosRouter.js";
+import prescripcionRouter from "./src/router/prescripcionRouter.js";
 
 const app = express();
 app.use(cors());
@@ -21,11 +22,12 @@ const __filename = fileURLToPath(import.meta.url);//Importa el __filename
 const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, "/src/public")));
 app.set("view engine", "pug");
-//app.locals.pretty = true;
+app.locals.pretty = true;
 app.set("views", path.join(__dirname, "/src/views"));
 app.use('/', profesionalRouter);
 app.use('/', adminRouter);
 app.use('/', medicamentosRouter);
+app.use('/', prescripcionRouter);
 app.use('/', pacienteRouter);//Usa ruta base '/', despues lo que venga, lo redigije a pacienteRouter
 //si es necesario.
 

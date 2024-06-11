@@ -20,7 +20,7 @@ router.get("/pacientes", async (req, res) => {
 //http://localhost:3000/pacientes (GET Thunderclient)
 router.get("/pacientes", async (req, res) => {
     const pacientes = await getPacientes();
-    console.log(pacientes);
+    //console.log(pacientes);
     res.status(200).json(pacientes);
 });
 

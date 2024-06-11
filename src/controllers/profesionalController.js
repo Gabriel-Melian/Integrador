@@ -6,7 +6,7 @@ export async function getProfesionales() {
     try {
         const result = await conn.execute(query);
         if(result.length === 0) return [];
-        console.log(result);
+        //console.log(result);
         const [rows] = result;
         return rows;
     } catch (error) {
@@ -36,7 +36,7 @@ export async function getProfesional(id) {//Buscar por ID
     try {
         const result = await conn.execute(query, [id]);
         if(result.length === 0) return console.log('El ID Profesional ' + id + ' no existe');
-        console.log(result);
+        //console.log(result);
         const [rows] = result;
         return rows[0];
     } catch (error) {
@@ -50,7 +50,7 @@ export async function getProfesionalDni(dni) {//Buscar por DNI
     try {
         const result = await conn.execute(query, [dni]);
         if(result.length === 0) return console.log('El DNI Profesional ' + dni + ' no existe');
-        console.log(result);
+        //console.log(result);
         const [rows] = result;
         return rows[0];
     } catch (error) {
@@ -64,7 +64,7 @@ export async function getProfesionalNombre(profesional) {//Buscar por nombre
     try {
         const result = await conn.execute(query, [profesional]);
         if(result.length === 0) return console.log('El Profesional ' + profesional + ' no existe');
-        console.log(result);
+        //console.log(result);
         const [rows] = result;
         return rows[0];
     } catch (error) {
@@ -77,7 +77,7 @@ export async function desactivarProfesional(id) {
     const query = "UPDATE profesionales SET estado = 0 WHERE id = ?";
     try {
         const result = await conn.execute(query, [id]);
-        console.log(result);
+        //console.log(result);
         return result;
     } catch (error) {
         console.error("Error executing query:", error);
@@ -89,7 +89,7 @@ export async function activarProfesional(id) {
     const query = "UPDATE profesionales SET estado = 1 WHERE id = ?";
     try {
         const result = await conn.execute(query, [id]);
-        console.log(result);
+        //console.log(result);
         return result;
     } catch (error) {
         console.error("Error executing query:", error);
@@ -102,7 +102,7 @@ export async function modificarProfesional(profesional) {
     const query = "UPDATE profesionales SET nombre = ?, apellido = ?, dni = ?, email = ?, profesion = ?, especialidad = ?, matricula = ? WHERE id = ?";
     try {
         const [result] = await conn.execute(query, [nombre, apellido, dni, email, profesion, especialidad, matricula, id]);
-        console.log(result);
+        //console.log(result);
         return result;
     } catch (error) {
         console.error("Error executing query:", error);
