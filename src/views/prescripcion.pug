@@ -42,7 +42,6 @@ html(lang="en")
             th Sexo
             td 
               select(name="sexo")
-                option(value="") Seleccione
                 option(value="M" selected=sexo==="M") Masculino
                 option(value="F" selected=sexo==="F") Femenino
             th Plan
@@ -65,9 +64,9 @@ html(lang="en")
             th Medicamento/Prestación
             td
               select(name="medicamento")
-                option(value="") Seleccione un medicamento
-            //    each medicamento in medicamentos
-            //      option(value=medicamento.id) #{medicamento.nombre} - #{medicamento.concentracion} - #{medicamento.formaFarm} - #{medicamento.presentacion} - #{medicamento.estado}
+                option(value="") Sin medicamentos
+                each medicamento in medicamentos
+                  option(value=medicamento.id) #{medicamento.nombre} - #{medicamento.concentracion} - #{medicamento.formaFarm} - #{medicamento.presentacion} - #{medicamento.estado}
           tr
             th Dosificación
             td 
@@ -77,8 +76,8 @@ html(lang="en")
             td
               select(name="prestacion")
                 option(value="") Seleccione una prestación
-          //      each prestacion in prestaciones
-          //        option(value=prestacion.id) #{prestacion.estudio} - #{prestacion.parteCuerpo}
+                each prestacion in prestaciones
+                  option(value=prestacion.id) #{prestacion.estudio} - #{prestacion.parteCuerpo}
       .section
         button(type="button" onclick="generarPrescripcion()") Generar Prescripción
   script.

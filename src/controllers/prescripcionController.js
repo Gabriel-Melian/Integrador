@@ -1,4 +1,4 @@
-import prescripcion from "../models/prescripcion.js";
+import Prescripcion from "../models/prescripcion.js";
 import { conn } from "../models/db.js";
 
 export async function getPrescripciones() {

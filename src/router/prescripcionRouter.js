@@ -1,5 +1,7 @@
 import {getPrescripciones, getPrescripcion} from "../controllers/prescripcionController.js";
 import {getProfesional} from "../controllers/profesionalController.js";
+import {getMedicamentos} from "../controllers/medicamentosController.js";
+import {getPrestaciones} from "../controllers/prestacionController.js";
 import {Router} from "express";
 const router = Router();
 
@@ -17,11 +19,14 @@ router.get("/prescripciones", async (req, res) => {
 router.get("/prescripcion", async (req, res) => {
     const prescripcion = await getPrescripciones(3);
     const profesional = await getProfesional(3);
+    const medicamentos = await getMedicamentos();
+    const prestaciones = await getPrestaciones();
     //console.log(prescripcion);
     prescripcion.forEach(prescripcion => {
         prescripcion.fechaPrestacion = new Date(prescripcion.fechaPrestacion).toLocaleDateString();
     })
-    res.status(200).render("prescripcion", {prescripciones: prescripcion, profesional: profesional});
+    res.status(200).render("prescripcion", {prescripciones: prescripcion,
+        profesional: profesional, medicamentos: medicamentos, prestaciones: prestaciones});
 });
 
 

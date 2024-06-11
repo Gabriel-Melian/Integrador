@@ -11,6 +11,7 @@ import profesionalRouter from "./src/router/profesionalRouter.js";
 import adminRouter from "./src/router/adminRouter.js";
 import medicamentosRouter from "./src/router/medicamentosRouter.js";
 import prescripcionRouter from "./src/router/prescripcionRouter.js";
+import prestacionRouter from "./src/router/prestacionRouter.js";
 
 const app = express();
 app.use(cors());
@@ -28,6 +29,7 @@ app.use('/', profesionalRouter);
 app.use('/', adminRouter);
 app.use('/', medicamentosRouter);
 app.use('/', prescripcionRouter);
+app.use('/', prestacionRouter);
 app.use('/', pacienteRouter);//Usa ruta base '/', despues lo que venga, lo redigije a pacienteRouter
 //si es necesario.
 
