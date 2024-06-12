@@ -63,7 +63,7 @@ html(lang="en")
           tr
             th Diagnóstico
             td 
-              textarea(name="diagnostico" placeholder="Diagnóstico") #{diagnostico}
+              textarea(name="diagnostico" id="diagnostico" placeholder="Diagnóstico") #{diagnostico}
             th Fecha de la Prescripción
             td 
               span(name="fechaPrescrip", id="fechaPrescrip") Fecha actual
@@ -74,7 +74,7 @@ html(lang="en")
           tr
             th Prestación
             td
-              select(name="prestacion")
+              select(name="prestacion" id="prestacionSelect")
                 option(value="") Seleccione una prestación
                 each prestacion in prestaciones
                   option(value=prestacion.id) #{prestacion.estudio} - #{prestacion.parteCuerpo}
@@ -95,7 +95,8 @@ html(lang="en")
               input(type="text" name="duracion" placeholder="Ingrese duracion")
 
       .section
-        button(type="button" onclick="generarPrescripcion()") Generar Prescripción
+        button(type="button" onclick="generarPrescripcion()") Generar Prescripcion
+        button(type="button" onclick="imprimir()") Imprimir
 
 
   script.
@@ -111,7 +112,7 @@ html(lang="en")
       document.getElementById('fechaPrescrip').innerText = formatDate(hoy);
     });
 
-    function generarPrescripcion() {
+    function imprimir() {
       window.print();
     }
 
@@ -119,7 +120,7 @@ html(lang="en")
       let obraSocialId = document.getElementById('obraSocial').value;
       let planSelect = document.getElementById('plan');
       
-      // Limpiar opciones actuales
+      //Limpiar opciones actuales
       planSelect.innerHTML = '<option value="">Seleccione un plan</option>';
       
       if (obraSocialId) {
@@ -133,5 +134,93 @@ html(lang="en")
         });
       }
     }
-
     const planesPorObraSocial = !{JSON.stringify(planesPorObraSocial)};
+
+    
+    function generarPrescripcion() {
+    //paciente
+    const nombrePaciente = document.getElementsByName("nombrePaciente")[0].value;
+    const apellidoPaciente = document.getElementsByName("apellidoPaciente")[0].value;
+    const dniPaciente = document.getElementsByName("dniPaciente")[0].value;
+    const sexo = document.getElementsByName("sexo")[0].value;
+    const fechaNac = document.getElementsByName("fechaNac")[0].value;
+    const emailPaciente = document.getElementsByName("emailPaciente")[0].value;
+    const idObraSocial = document.getElementsByName("obraSocial")[0].value;
+
+    const paciente = {
+        nombre: nombrePaciente,
+        apellido: apellidoPaciente,
+        dni: dniPaciente,
+        sexo: sexo,
+        fechaNac: fechaNac,
+        email: emailPaciente,
+        idObraSocial: idObraSocial,
+    };
+
+    //Prestacion
+    const prestacionSelect = document.getElementById("prestacionSelect");
+    const idPrestacion = prestacionSelect.value;
+    const diagnostico = document.getElementById("diagnostico").value;
+    const idProfesional = 3;//De momento se hardcodea
+    const idMedicamento = document.getElementsByName("medicamento")[0].value;
+    const dosis = document.getElementsByName("dosificacion")[0].value;
+    const duracion = document.getElementsByName("duracion")[0].value;
+
+    const prescripcion = {
+        idPrestacion: idPrestacion,
+        fechaPrestacion: new Date().toISOString().split('T')[0],//Fecha en formato YYYY-MM-DD
+        idProfesional: idProfesional,
+        diagnostico: diagnostico,
+        idMedicamento: idMedicamento,
+        dosis: dosis,
+        duracion: duracion
+    };
+
+    //Fetch para enviar datos al server
+    fetch("/prescripcion/nueva", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ paciente: paciente, prescripcion: prescripcion })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error en la solicitud');
+        }
+        return response.json();
+    })
+    .then(resultado => {
+        console.log("Prescripción generada exitosamente!", resultado);
+        alert("Prescripcion creada exitosamente");
+        const inputs = document.querySelectorAll("input");
+        inputs.forEach(element => {
+          element.readOnly = true;
+        })
+    })
+    .catch(error => {
+        console.error("Error al generar la prescripción:", error);
+    });
+    }
+
+    async function guardarPrescripcion(prescripcion) {
+      try {
+          const respuesta = await fetch("/prescripcion/nueva", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json"
+              },
+              body: JSON.stringify(prescripcion)
+          });
+
+          if (!respuesta.ok) {
+              throw new Error('Error en la solicitud');
+          }
+
+          const resultado = await respuesta.json();
+          console.log("Prescripción generada exitosamente!");
+          return resultado;
+      } catch (error) {
+          console.error("Error al generar la prescripción:", error);
+      }
+    }

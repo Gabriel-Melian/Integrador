@@ -1,6 +1,6 @@
 h2
   | Pacientes registrados
-  button(class="btn-ingresar", onclick="ingresarNuevoPaciente()") Ingresar nuevo paciente
+//  button(class="btn-ingresar", onclick="ingresarNuevoPaciente()") Ingresar nuevo paciente
 table(class="tabla")
   thead
     tr
@@ -27,4 +27,5 @@ table(class="tabla")
         td
           button(onclick=`editarPaciente(${paciente.id})`) Editar
           button(onclick=`bajaPaciente(${paciente.id})`) Dar de baja
-        //  button(onclick=`verPrescrip(${paciente.id})`) Ver Prescripciones
+          button(onclick=`editarPaciente(${paciente.id})`) +Prescripcion
+          button(onclick=`verPrescrip(${paciente.id})`) Ver Prescripciones

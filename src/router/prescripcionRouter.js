@@ -1,14 +1,15 @@
-import {getPrescripciones, getPrescripcion} from "../controllers/prescripcionController.js";
+import {getPrescripciones, getPrescripcionesProf, guardarPrescripcion} from "../controllers/prescripcionController.js";
 import {getProfesional} from "../controllers/profesionalController.js";
 import {getMedicamentos} from "../controllers/medicamentosController.js";
 import {getPrestaciones} from "../controllers/prestacionController.js";
 import { getObrasSociales } from "../controllers/obraSocialController.js";
 import {getPlanes} from "../controllers/planController.js";
+import { guardarPaciente } from "../controllers/pacienteController.js";
 import {Router} from "express";
 const router = Router();
 
 //http://localhost:3000/prescripciones (GET Thunderclient)
-router.get("/prescripciones", async (req, res) => {
+router.get("/prescripciones", async (req, res) => {//Falta obtener prescripciones en base al idProfesional
     const prescripciones = await getPrescripciones(3);
     //console.log(prescripciones);
     prescripciones.forEach(prescripcion => {
@@ -42,5 +43,26 @@ router.get("/prescripcion", async (req, res) => {
         obrasSociales: obrasSociales, planesPorObraSocial: planesPorObraSocial});
 });
 
+//http://localhost:3000/prescripcion/nueva (POST Thunderclient)
+router.post("/prescripcion/nueva", async (req, res) => {
+    const paciente = req.body.paciente;
+    const prescripcionData = req.body.prescripcion;//const prescripcion = req.body;
+    //const result = await guardarPrescripcion(prescripcion);
+    //res.status(200).json(result);
+
+    try {
+        const pacienteGuardado = await guardarPaciente(paciente);
+
+        //Asigno idPaciente a la prescripcion
+        prescripcionData.idPaciente = pacienteGuardado.id;
+
+        //Guardo prescripcion
+        const resultado = await guardarPrescripcion(prescripcionData);
+        res.status(200).json(resultado);
+    } catch (error) {
+        res.status(500).json({ error: "Error al guardar la prescripción" });
+    }
+
+});
 
 export default router;
