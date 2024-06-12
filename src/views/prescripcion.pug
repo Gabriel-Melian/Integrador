@@ -58,17 +58,6 @@ html(lang="en")
               select(name="plan" id="plan")
                 option(value="") Seleccione Plan
       .section
-        h2 Diagnóstico y Tratamiento
-        table
-          tr
-            th Diagnóstico
-            td 
-              textarea(name="diagnostico" id="diagnostico" placeholder="Diagnóstico") #{diagnostico}
-            th Fecha de la Prescripción
-            td 
-              span(name="fechaPrescrip", id="fechaPrescrip") Fecha actual
-            //input(type="date" name="fechaPrescrip" value=fechaPrescrip)
-      .section
         h2 Medicamentos y/o Prestaciones
         table
           tr
@@ -84,15 +73,26 @@ html(lang="en")
               select(name="medicamento")
                 option(value="") Sin medicamentos
                 each medicamento in medicamentos
-                  option(value=medicamento.id) #{medicamento.nombre} - #{medicamento.concentracion} - #{medicamento.formaFarm} - #{medicamento.presentacion} - #{medicamento.estado}
+                  option(value=medicamento.id) #{medicamento.nombre} #{medicamento.concentracion} en #{medicamento.formaFarmaceutica} #{medicamento.presentacion}
           tr
             th Dosificación
             td 
-              input(type="text" name="dosificacion" placeholder="Ingrese dosificación")
+              textarea(name="dosificacion" id="dosificacion" placeholder="Dosificación")
           tr
             th Duracion
             td 
-              input(type="text" name="duracion" placeholder="Ingrese duracion")
+              textarea(name="duracion" id="duracion" placeholder="Duracion")
+      .section
+        h2 Diagnóstico y Tratamiento
+        table
+          tr
+            th Diagnóstico
+            td 
+              textarea(name="diagnostico" id="diagnostico" placeholder="Diagnóstico") #{diagnostico}
+            th Fecha de la Prescripción
+            td 
+              span(name="fechaPrescrip", id="fechaPrescrip") Fecha actual
+            //input(type="date" name="fechaPrescrip" value=fechaPrescrip)
 
       .section
         button(type="button" onclick="generarPrescripcion()") Generar Prescripcion
@@ -161,10 +161,10 @@ html(lang="en")
     const prestacionSelect = document.getElementById("prestacionSelect");
     const idPrestacion = prestacionSelect.value;
     const diagnostico = document.getElementById("diagnostico").value;
-    const idProfesional = 3;//De momento se hardcodea
+    const idProfesional = 2;//De momento se hardcodea
     const idMedicamento = document.getElementsByName("medicamento")[0].value;
-    const dosis = document.getElementsByName("dosificacion")[0].value;
-    const duracion = document.getElementsByName("duracion")[0].value;
+    const dosis = document.getElementById("dosificacion").value;
+    const duracion = document.getElementById("duracion").value;
 
     const prescripcion = {
         idPrestacion: idPrestacion,
@@ -193,10 +193,23 @@ html(lang="en")
     .then(resultado => {
         console.log("Prescripción generada exitosamente!", resultado);
         alert("Prescripcion creada exitosamente");
+
         const inputs = document.querySelectorAll("input");
         inputs.forEach(element => {
           element.readOnly = true;
         })
+
+        const selects = document.querySelectorAll("select");
+        selects.forEach(element => {
+          element.disabled = true;
+        });
+
+        const textareas = document.querySelectorAll("textarea");
+        textareas.forEach(element => {
+          element.readOnly = true;
+        });
+
+
     })
     .catch(error => {
         console.error("Error al generar la prescripción:", error);

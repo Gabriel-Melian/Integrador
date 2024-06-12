@@ -22,10 +22,13 @@ table(class="tabla")
         td #{paciente.fechaNac}
         td #{paciente.email}
         td #{paciente.sexoStr}
-        td #{paciente.idObraSocial}
+        td #{paciente.nombreObraSocial}
         td #{paciente.estadoStr}
         td
           button(onclick=`editarPaciente(${paciente.id})`) Editar
+          br
           button(onclick=`bajaPaciente(${paciente.id})`) Dar de baja
+          br
           button(onclick=`editarPaciente(${paciente.id})`) +Prescripcion
+          br
           button(onclick=`verPrescrip(${paciente.id})`) Ver Prescripciones

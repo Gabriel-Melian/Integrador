@@ -2,10 +2,10 @@ import Paciente from "../models/paciente.js";
 import { conn } from "../models/db.js";
 
 export async function getPacientes(idMedico) {//Mostrar pacientes por medico
-    const query = `SELECT p.* FROM prescripcion
-                JOIN paciente as p ON prescripcion.idPaciente = p.id
-                JOIN profesionales as pr ON prescripcion.idProfesional = pr.id
-                WHERE pr.id = ?;`;
+    const query = `SELECT p.*, o.nombre AS nombreObraSocial FROM prescripcion
+                JOIN paciente AS p ON prescripcion.idPaciente = p.id
+                JOIN profesionales AS pr ON prescripcion.idProfesional = pr.id
+                JOIN obrasocial AS o ON p.idObraSocial = o.id WHERE pr.id = ?`;
     try {
         const result = await conn.execute(query, [idMedico]);
         if(result.length === 0) return [];

@@ -9,8 +9,8 @@ const router = Router();
 
 //http://localhost:3000/profesional/test (GET Thunderclient)
 router.get("/profesional", async (req, res) => {
-    const profesional = await getProfesional(3);
-    const pacientes = await getPacientes(3);
+    const profesional = await getProfesional(2);
+    const pacientes = await getPacientes(2);
     //console.log(pacientes);
     //console.log(profesional);
     pacientes.forEach(paciente => {
