@@ -10,12 +10,13 @@ const router = Router();
 
 //http://localhost:3000/prescripciones (GET Thunderclient)
 router.get("/prescripciones", async (req, res) => {//Falta obtener prescripciones en base al idProfesional
-    const prescripciones = await getPrescripciones();
+    const prescripciones = await getPrescripcionesProf(2);
+    const profesional = await getProfesional(2);
     //console.log(prescripciones);
     prescripciones.forEach(prescripcion => {
         prescripcion.fechaPrestacion = new Date(prescripcion.fechaPrestacion).toLocaleDateString();
     })
-    res.status(200).render("panelPrescripciones", {prescripciones: prescripciones});
+    res.status(200).render("panelPrescripciones", {prescripciones: prescripciones, profesional: profesional} );
 });
 
 //http://localhost:3000/prescripcion (GET Thunderclient)

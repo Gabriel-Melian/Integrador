@@ -9,6 +9,7 @@ html(lang="en")
     header
       .container
         h1 Panel de Prescripciones
+          h2 Médico: #{profesional.nombre} #{profesional.apellido}
         //nav
         //  ul
         //    li
@@ -17,27 +18,31 @@ html(lang="en")
     main
       .container
         h2 
-          | Prescripciones realizadas
-          a(href="/prescripcion" class="btn-ingresar") Nueva Prescripcion
+          | Prescripciones realizadas 
+          a(href="/prescripcion" class="btn") Nueva Prescripcion
         table(class="tabla")
           thead
             tr
-              th id Paciente
-              th id Prestacion
-              th Fecha Prestacion
-              th id Profesional
+              th Apellido Paciente
+              th Nombre Paciente
+              th Prestacion
+              th Fecha
               th Diagnostico
-              th id Lista
+              th Medicamento
+              th Dosis
+              th Duracion
               th Acciones
           tbody
             each prescripcion in prescripciones
               tr
-                td #{prescripcion.idPaciente}
-                td #{prescripcion.idPrestacion}
+                td #{prescripcion.apellidoPaciente}
+                td #{prescripcion.nombrePaciente}
+                td #{prescripcion.estudio}
                 td #{prescripcion.fechaPrestacion}
-                td #{prescripcion.idProfesional}
                 td #{prescripcion.diagnostico}
-                td #{prescripcion.idLista}
+                td #{prescripcion.nombreMedicamento}
+                td #{prescripcion.dosis}
+                td #{prescripcion.duracion}
                 td
                   button(class="btnVer", onclick=`bajaPrescripcion(${prescripcion.id})`) Ver mas
 

@@ -19,12 +19,16 @@ export async function getPrescripciones() {
 export async function getPrescripcionesProf(idProf) {
     const query = `
         SELECT p.id, p.idPaciente, p.idPrestacion, p.fechaPrestacion, p.idProfesional, p.diagnostico, p.idMedicamento, p.dosis, p.duracion,
-               pr.nombre AS nombreProfesional, pr.apellido AS apellidoProfesional,
-               pa.nombre AS nombrePaciente, pa.apellido AS apellidoPaciente
+            pr.nombre AS nombreProfesional, pr.apellido AS apellidoProfesional,
+            pa.nombre AS nombrePaciente, pa.apellido AS apellidoPaciente,
+            pres.estudio AS estudio,
+            med.nombre AS nombreMedicamento
         FROM prescripcion p
-        JOIN profesional pr ON p.idProfesional = pr.id
+        JOIN profesionales pr ON p.idProfesional = pr.id
         JOIN paciente pa ON p.idPaciente = pa.id
-        WHERE p.idProfesional = ?
+        JOIN prestaciones pres ON p.idPrestacion = pres.id
+        JOIN medicamentos med ON p.idMedicamento = med.id
+        WHERE p.idProfesional = ?;
     `;
     try {
         const [rows] = await conn.execute(query, [idProf]);

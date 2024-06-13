@@ -10,7 +10,7 @@ html(lang="en")
       .header
         h1 Prescripción Electrónica
         p
-          strong Datos del Medico:
+          strong Datos del Médico:
           br
           strong Nombre y apellido: #{profesional.apellido} #{profesional.nombre}
           br
@@ -79,7 +79,7 @@ html(lang="en")
             td 
               textarea(name="dosificacion" id="dosificacion" placeholder="Dosificación")
           tr
-            th Duracion
+            th Duración
             td 
               textarea(name="duracion" id="duracion" placeholder="Duracion")
       .section
@@ -95,7 +95,7 @@ html(lang="en")
             //input(type="date" name="fechaPrescrip" value=fechaPrescrip)
 
       .section
-        button(type="button" onclick="generarPrescripcion()") Generar Prescripcion
+        button(type="button" onclick="generarPrescripcion()") Generar Prescripción
         button(type="button" onclick="imprimir()") Imprimir
 
 
