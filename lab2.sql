@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 13-06-2024 a las 18:39:44
+-- Tiempo de generación: 14-06-2024 a las 01:32:28
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `lab2`
 --
+CREATE DATABASE IF NOT EXISTS `lab2` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+USE `lab2`;
 
 -- --------------------------------------------------------
 
@@ -159,7 +161,8 @@ INSERT INTO `paciente` (`id`, `nombre`, `apellido`, `dni`, `sexo`, `fechaNac`, `
 (17, 'Agustin', 'Amaya', 44765894, 'Masculino', '2001-01-19', 'agustinPP@gmail.com', 1, 1),
 (18, 'Lorenzo', 'Rodriguez', 42674855, 'Masculino', '1995-07-06', 'Lrodriguez@gmail.com', 2, 1),
 (19, 'Gonzalo', 'Peñalotti', 43564700, 'Masculino', '2000-02-13', 'GPenalotti@gmail.com', 1, 1),
-(20, 'Gustavo', 'Saez', 41567345, 'Masculino', '1998-07-23', 'gsaez@gmail.com', 3, 1);
+(20, 'Gustavo', 'Saez', 41567345, 'Masculino', '1998-07-23', 'gsaez@gmail.com', 3, 1),
+(21, 'Jesica', 'Moll Montiveros', 29758493, 'Femenino', '1983-05-12', 'jesiMoll@gmail.com', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -226,7 +229,8 @@ INSERT INTO `prescripcion` (`id`, `idPaciente`, `idPrestacion`, `fechaPrestacion
 (12, 17, 12, '2024-06-12', 2, 'Chequeo medico', 33, '1 comprimido diario', '10 dias'),
 (13, 18, 13, '2024-06-12', 2, 'Fatiga cronica, dolor en el pecho', 41, '2 comprimidos por dia', '15 dias'),
 (14, 19, 1, '2024-06-12', 2, 'Chequeo medico', 37, '1 medida diaria', 'Hasta terminar el medicamento'),
-(15, 20, 11, '2024-06-13', 2, 'Huesos fragiles', 35, '1 capsula al dia', '20 dias');
+(15, 20, 11, '2024-06-13', 2, 'Huesos fragiles', 35, '1 capsula al dia', '20 dias'),
+(16, 21, 5, '2024-06-13', 2, 'Se observan rastros de  lesiones neuronales por exceso de colorcitos en el Project', 31, '1 capsula al dia', '2 semanas');
 
 -- --------------------------------------------------------
 
@@ -449,7 +453,7 @@ ALTER TABLE `obrasocial`
 -- AUTO_INCREMENT de la tabla `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `plan`
@@ -461,7 +465,7 @@ ALTER TABLE `plan`
 -- AUTO_INCREMENT de la tabla `prescripcion`
 --
 ALTER TABLE `prescripcion`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `prestaciones`
